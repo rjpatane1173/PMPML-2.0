@@ -6,6 +6,9 @@
     <title>PMPML</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
+  	<link rel="stylesheet" href="C:\Users\NEXUS\Desktop\PMPML Web\styles.css">
+  	<script type="text/javascript" src="script.js"></script>
+
 </head>
 <body>
 
@@ -20,12 +23,131 @@
     </div>
 </header>
 
+
+<!-- Main Content -->
+<main class="main-content">
+	<div id="regularTicketContent" style="display: none;">    
+    <div>
+    <label for="boardingStop">Boarding Stop:</label>
+    <select id="boardingStop">
+       <!--Options will be populated dynamically using JavaScript-->
+    </select> 
+  
+  </div>
+  <div>
+    <label for="destinationStop">Destination Stop:</label>
+    <select id="destinationStop">
+      <!-- Options will be populated dynamically using JavaScript -->
+    </select>
+  </div>
+  <button onclick="showAvailableBuses()">Show Available Buses</button>
+  <div id="availableBuses">
+    <!-- Bus information will be displayed here -->
+  </div>
+  <!-- -->
+   <div id="adultsContainer">
+        <!-- Buttons for selecting number of adults will be displayed here -->
+    </div>
+  <div id="ticketInfo"></div>
+<!-- Confirm Ticket button -->
+  <button id="confirmTicketBtn" onclick="confirmTicket()" style="display: none;">Confirm Ticket</button>
+  <div id="passwordContainer"></div>
+
+
+  <!-- this bellow adds the js functionality -->
+
+ 	<script src="pmpmldataset.js"></script>
+  	<script src="script.js"></script>
+  	<script src="ticketGenerator.js"></script>
+	</div>
+
+
+	<div id="passContent" style="display:none;">
+		<form id="passForm" action="submit_pass.php" method="post">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <label for="area">Area:</label>
+        <select id="area" name="area">
+            <option value="PMC">PMC Area fare 40</option>
+            <option value="PCMC">PCMC Area fare 40</option>
+            <option value="Both">Both PMC & PCMC fare 50</option>
+            <option value="All">All Routes fare 70</option>
+        </select><br><br>
+
+        <label for="idProof">Last Four Digits of ID Proof:</label>
+        <input type="text" id="idProof" name="idProof" maxlength="4"><br><br>
+
+        <input type="submit" value="Preview">
+    </form>
+
+    <div id="preview" style="display: none;">
+        <h2>Preview</h2>
+        <p><strong>Gender:</strong> <span id="previewGender"></span></p>
+        <p><strong>Area:</strong> <span id="previewArea"></span></p>
+        <p><strong>Fare:</strong> <span id="previewFare"></span></p>
+    </div>
+
+    <form id="confirmForm" action="confirm_pass.php" method="post" style="display: none;">
+        <label for="password">Enter Password (1173):</label>
+        <input type="password" id="password" name="password">
+        <input type="submit" value="Confirm Booking">
+    </form>
+
+    <script>
+        document.getElementById('passForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var gender = document.getElementById('gender').value;
+            var area = document.getElementById('area').value;
+            var idProof = document.getElementById('idProof').value;
+            var previewGender = document.getElementById('previewGender');
+            var previewArea = document.getElementById('previewArea');
+            var previewFare = document.getElementById('previewFare');
+
+            previewGender.textContent = gender;
+            previewArea.textContent = area;
+            switch (area) {
+                case 'PMC':
+                    previewFare.textContent = '40';
+                    break;
+                case 'PCMC':
+                    previewFare.textContent = '40';
+                    break;
+                case 'Both':
+                    previewFare.textContent = '50';
+                    break;
+                case 'All':
+                    previewFare.textContent = '70';
+                    break;
+            }
+
+            document.getElementById('preview').style.display = 'block';
+            document.getElementById('confirmForm').style.display = 'block';
+        });
+
+        document.getElementById('confirmForm').addEventListener('submit', function(event) {
+            var password = document.getElementById('password').value;
+            if (password !== '1173') {
+                alert('Incorrect password. Please try again.');
+                event.preventDefault();
+            }
+        });
+    </script>
+	</div>
+</main>
+
+
+
 <!-- Footer -->
 <footer class="footer">
     <nav class="navbar">
         <a href="#home">home</a> 
-        <a href="#regular">regular ticket</a> 
-        <a href="#pass">pass</a> 
+        <a href="#" onclick="showRegularTicketContent()">regular ticket</a> 
+        <a href="#" onclick="showPassForm()">pass</a> 
         <a href="#tutorial">tutorial</a> 
         <a href="#contact">contact</a>
     </nav>
