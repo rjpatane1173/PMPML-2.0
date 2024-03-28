@@ -1,97 +1,118 @@
+/* CSS Styles */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,300&display=swap');
 
-:root
-{
-	--green: green;
-	--darkgreen: #013220;
-	--black: #130f40;
-	--light-color: #666;
-	--box-shadow: 0 .1rem 1rem rgba(0,0,0.1);
-	--border: 2rem solid rgba(0,0,0.1);
-	--outline: .1rem solid rgba(0,0,0.1);
+:root {
+    --green: green;
+    --darkgreen: #013220;
+    --black: #130f40;
+    --light-color: #666;
+    --box-shadow: 0 .1rem 1rem rgba(0,0,0.1);
+    --border: 2rem solid rgba(0,0,0.1);
+    --outline: .1rem solid rgba(0,0,0.1);
 }
 
-
-*
-{
-	font-family: 'Poppins',sans-serif;
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	outline: none;
-	text-decoration: none;
-	text-transform: capitalize;
-	transition: all .2s linear;
+* {
+    font-family: 'Poppins',sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
 }
 
-html
-{
-	font-size: 62.5%;
-	overflow: hidden;
-	scroll-behavior: smooth;
-	scroll-padding-top: 7rem;
+html {
+    font-size: 62.5%;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
 }
 
-body
-{
-	background: #eee;
+body {
+    background: #eee;
 }
 
-.header
-{
-	border: 0px solid;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 2rem 9%;
-	background: #fff;
-	box-shadow: var(--box-shadow);
+.header,
+.footer {
+    position: fixed;
+    width: 100%;
+    background: #fff;
+    box-shadow: var(--box-shadow);
 }
 
-
-.header img
-{
-	width:11rem;
+.header {
+    top: 0;
+    left: 0;
+    padding: 2rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.header .navbar a
-{
-	font-size: 1.7rem;
-	margin: 0 1rem;
-	color: var(--black);
-	font-weight: bolder;
-}
-.header .navbar a:hover
-{
-	color: var(--green);
+.footer {
+    bottom: 0;
+    display: flex;
+    justify-content: center;
 }
 
-
-.header .icon div
-{
-	height: 4.5rem;
-	width: 4.5rem;
-	line-height: 4.5rem;
-	border-radius: .5rem;
-	background: #eee;
-	color: var(--black);
-	font-size: 2rem;
-	margin-right:.3rem ;
-	text-align: center;
-	cursor: pointer;
+.header .header-content {
+    display: flex;
+    align-items: center;
 }
 
-.header .icon div:hover
-{
-	background: var(--green);
-	color: white;
+.header .title {
+    font-size: 5rem; /* Adjust size as needed */
+    margin-left: 2rem; /* Adjust spacing as needed */
+    font-weight: bold; /* Make it bold */
+    text-align: center; /* Align center */
 }
 
-#menu-btn
-{
+.header img.logo {
+    width: 11rem;
+}
+
+.header .icon div {
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background: #eee;
+    color: var(--black);
+    font-size: 2rem;
+    margin-right: .3rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.header .icon div:hover {
+    background: var(--green);
+    color: white;
+}
+
+#menu-btn {
+    display: none;
+}
+
+.footer .navbar {
+    display: flex;
+}
+
+.footer .navbar a {
+    font-size: 2vw; /* Set font size to be 2 times the viewport width */
+    margin: 0 1rem;
+    color: var(--black);
+    font-weight: bolder;
+    position: relative;
+}
+
+.footer .navbar a:not(:last-child)::after {
 	display: none;
+    content: "|"; /* Add "|" symbol after each anchor tag except the last one */
+    margin: 0 1rem; /* Adjust spacing as needed */
+    color: var(--black);
+}
+
+.footer .navbar a:hover {
+    color: var(--green);
 }
