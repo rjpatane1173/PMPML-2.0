@@ -32,6 +32,16 @@
             background: #eee;
         }
 
+
+        .main-content {
+            background-color: white; /* Set background color to white */
+            padding: 2rem; /* Add padding as needed */
+            margin-top: 10vh; /* Set margin top dynamically based on header height */
+            font-size: 2rem;
+        }
+
+
+
         .header,
         .footer {
             position: fixed;
@@ -98,28 +108,27 @@
         }
 
         .footer .navbar {
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent line breaks */
+}
 
-        .footer .navbar a {
-            font-size: 4vw; /* Set font size to be 2 times the viewport width */
-            margin: 0 2rem;
-            color: var(--black);
-            font-weight: bolder;
-            position: relative;
-        }
+.footer .navbar a {
+    font-size: 4vw; /* Set font size to be 2 times the viewport width */
+    margin: 0 2rem;
+    color: var(--black);
+    font-weight: bolder;
+    position: relative;
+}
 
-        .footer .navbar a:not(:last-child)::after {
-            display: none;
-            content: "|"; /* Add "|" symbol after each anchor tag except the last one */
-            margin: 0 1rem; /* Adjust spacing as needed */
-            color: var(--black);
-            
-        }
 
-        .footer .navbar a:hover {
+
+.footer .navbar a:hover {
             color: var(--green);
-        }
+}
+
+
+
 
