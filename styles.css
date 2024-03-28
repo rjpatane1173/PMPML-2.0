@@ -46,7 +46,7 @@
         .footer {
             position: fixed;
             width: 100%;
-            background: #fff;
+            background: var(-green) ;
             box-shadow: var(--box-shadow);
         }
 
