@@ -36,6 +36,7 @@
         .main-content {
             background-color: white; /* Set background color to white */
             padding: 2rem; /* Add padding as needed */
+height: 8vh;
             margin-top: 10vh; /* Set margin top dynamically based on header height */
             font-size: 1.5rem;
         }
@@ -61,7 +62,7 @@
         }
 
         .footer {
-             height: 10vh; /* Set height to 20% of the viewport height */
+             height: 8vh; /* Set height to 20% of the viewport height */
             bottom: 0;
             display: flex;
             justify-content: center;
