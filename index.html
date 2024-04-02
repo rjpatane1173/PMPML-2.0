@@ -1,142 +1,158 @@
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,300&display=swap');
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PMPML</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  	<link rel="stylesheet" href="C:\Users\NEXUS\Desktop\PMPML Web\styles.css">
+  	<script type="text/javascript" src="script.js"></script>
 
-        :root {
-            --green: green;
-            --darkgreen: #013220;
-            --black: #130f40;
-            --light-color: #666;
-            --box-shadow: 0 .1rem 1rem rgba(0,0,0.1);
-            --border: 2rem solid rgba(0,0,0.1);
-            --outline: .1rem solid rgba(0,0,0.1);
-        }
+</head>
+<body>
 
-        * {
-            font-family: 'Poppins',sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            outline: none;
-            text-decoration: none;
-            text-transform: capitalize;
-            transition: all .2s linear;
-        }
-
-        html {
-            font-size: 62.5%;
-            scroll-behavior: smooth;
-            scroll-padding-top: 7rem;
-        }
-
-        body {
-            background: #eee;
-            overflow-y: scroll;
-        }
+<!-- Header -->
+<header class="header">
+    <div class="header-content">
+        <img src="download.jpg" class="logo">
+        <span class="title">E-Ticket</span>
+        <div class="icon">
+            <div class="fa fa-bars" id="menu-btn"></div>
+        </div>
+    </div>
+</header>
 
 
-        .main-content {
-            background-color: white; /* Set background color to white */
-            padding: 2rem; /* Add padding as needed */
-            margin-top: 10vh; /* Set margin top dynamically based on header height */
-            margin-bottom: 20vh;
-            font-size: 2rem;
-            overflow-x: scroll;
-            height: 720px;
-            padding-top: 10px;
-            padding-right: 10px;
-            padding-bottom: 10px;
-            padding-left: 10px;
-        }
+<!-- Main Content -->
+<main class="main-content">
+	<div id="regularTicketContent" style="display: none;">    
+    <div>
+    <label for="boardingStop">Boarding Stop:</label>
+    <select id="boardingStop">
+       <!--Options will be populated dynamically using JavaScript-->
+    </select> 
+  
+  </div>
+  <div>
+    <label for="destinationStop">Destination Stop:</label>
+    <select id="destinationStop">
+      <!-- Options will be populated dynamically using JavaScript -->
+    </select>
+  </div>
+  <button onclick="showAvailableBuses()">Show Available Buses</button>
+  <div id="availableBuses">
+    <!-- Bus information will be displayed here -->
+  </div>
+  <!-- -->
+   <div id="adultsContainer">
+        <!-- Buttons for selecting number of adults will be displayed here -->
+    </div>
+  <div id="ticketInfo"></div>
+<!-- Confirm Ticket button -->
+  <button id="confirmTicketBtn" onclick="confirmTicket()" style="display: none;">Confirm Ticket</button>
+  <div id="passwordContainer"></div>
+
+
+  <!-- this bellow adds the js functionality -->
+
+ 	<script src="pmpmldataset.js"></script>
+  	<script src="script.js"></script>
+  	<script src="ticketGenerator.js"></script>
+	</div>
+
+
+	<div id="passContent" style="display:none;">
+		<form id="passForm" action="submit_pass.php" method="post">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <label for="area">Area:</label>
+        <select id="area" name="area">
+            <option value="PMC">PMC Area fare 40</option>
+            <option value="PCMC">PCMC Area fare 40</option>
+            <option value="Both">Both PMC & PCMC fare 50</option>
+            <option value="All">All Routes fare 70</option>
+        </select><br><br>
+
+        <label for="idProof">Last Four Digits of ID Proof:</label>
+        <input type="text" id="idProof" name="idProof" maxlength="4"><br><br>
+
+        <input type="submit" value="Preview">
+    </form>
+
+    <div id="preview" style="display: none;">
+        <h2>Preview</h2>
+        <p><strong>Gender:</strong> <span id="previewGender"></span></p>
+        <p><strong>Area:</strong> <span id="previewArea"></span></p>
+        <p><strong>Fare:</strong> <span id="previewFare"></span></p>
+    </div>
+
+    <form id="confirmForm" action="confirm_pass.php" method="post" style="display: none;">
+        <label for="password">Enter Password (1173):</label>
+        <input type="password" id="password" name="password">
+        <input type="submit" value="Confirm Booking">
+    </form>
+
+    <script>
+        document.getElementById('passForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var gender = document.getElementById('gender').value;
+            var area = document.getElementById('area').value;
+            var idProof = document.getElementById('idProof').value;
+            var previewGender = document.getElementById('previewGender');
+            var previewArea = document.getElementById('previewArea');
+            var previewFare = document.getElementById('previewFare');
+
+            previewGender.textContent = gender;
+            previewArea.textContent = area;
+            switch (area) {
+                case 'PMC':
+                    previewFare.textContent = '40';
+                    break;
+                case 'PCMC':
+                    previewFare.textContent = '40';
+                    break;
+                case 'Both':
+                    previewFare.textContent = '50';
+                    break;
+                case 'All':
+                    previewFare.textContent = '70';
+                    break;
+            }
+
+            document.getElementById('preview').style.display = 'block';
+            document.getElementById('confirmForm').style.display = 'block';
+        });
+
+        document.getElementById('confirmForm').addEventListener('submit', function(event) {
+            var password = document.getElementById('password').value;
+            if (password !== '1173') {
+                alert('Incorrect password. Please try again.');
+                event.preventDefault();
+            }
+        });
+    </script>
+	</div>
+</main>
 
 
 
-        .header,
-        .footer {
-            position: fixed;
-            width: 100%;
-            background: #4cbb17;
-            box-shadow: var(--box-shadow);
-        }
-
-        .header {
-            height: 10vh; /* Set height to 10% of the viewport height */
-            top: 0;
-            left: 0;
-            padding: 1rem 9%; /* Reduced padding for better visual appearance */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .footer {
-            font-size: 1rem;
-             height: 10em; /* Set height to 20% of the viewport height */
-            bottom: 0;
-            display: flex;
-            justify-content: center;
-        }
+<!-- Footer -->
+<footer class="footer">
+    <nav class="navbar">
+        <a href="#" onclick="showRegularTicketContent()">regular ticket</a> 
+        <a href="#" onclick="showPassForm()">pass</a> 
+        <a href="#showbuyedtickect">show ticket</a> 
+        <a href="#tutorial">tutorial</a> 
+        <a href="https://pmpml.org/contact">contact</a>
+    </nav>
+</footer>
 
 
-        .header .header-content {
-            display: flex;
-            align-items: center;
-        }
-
-        .header .title {
-            font-size: 5rem; /* Adjust size as needed */
-            margin-left: 2rem; /* Adjust spacing as needed */
-            font-weight: bold; /* Make it bold */
-            text-align: center; /* Align center */
-        }
-
-        .header img.logo {
-            max-height: 100%; /* Adjusted to 100% of the header's height */
-            max-width: 18%; /* Allow the width to adjust proportionally */
-            border-radius: 50%;
-        }
-
-        .header .icon div {
-            height: 4.5rem;
-            width: 4.5rem;
-            line-height: 4.5rem;
-            border-radius: .5rem;
-            background: #eee;
-            color: var(--black);
-            font-size: 2rem;
-            margin-right: .3rem;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .header .icon div:hover {
-            background: var(--green);
-            color: white;
-        }
-
-        #menu-btn {
-            display: none;
-        }
-
-        .footer .navbar {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    overflow-y: hidden;
-    white-space: nowrap; /* Prevent line breaks */
-}
-
-.footer .navbar a {
-    font-size: 4vw; /* Set font size to be 2 times the viewport width */
-    margin: 0 2rem;
-    color: var(--black);
-    font-weight: bolder;
-    position: relative;
-}
-
-
-
-.footer .navbar a:hover {
-            color: var(--green);
-}
-
-
+</body>
+</html>
