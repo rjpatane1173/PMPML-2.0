@@ -23,7 +23,7 @@
 
         html {
             font-size: 62.5%;
-           
+            overflow: hidden;
             scroll-behavior: smooth;
             scroll-padding-top: 7rem;
         }
@@ -36,9 +36,15 @@
         .main-content {
             background-color: white; /* Set background color to white */
             padding: 2rem; /* Add padding as needed */
-height: 8vh;
             margin-top: 10vh; /* Set margin top dynamically based on header height */
-            font-size: 1.5rem;
+            margin-bottom: 20vh;
+            font-size: 2rem;
+            overflow: scroll;
+            height: 720px;
+            padding-top: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
         }
 
 
@@ -47,7 +53,7 @@ height: 8vh;
         .footer {
             position: fixed;
             width: 100%;
-            background: var(--green) ;
+            background: #4cbb17;
             box-shadow: var(--box-shadow);
         }
 
@@ -62,7 +68,7 @@ height: 8vh;
         }
 
         .footer {
-             height: 8vh; /* Set height to 20% of the viewport height */
+             height: 10vh; /* Set height to 20% of the viewport height */
             bottom: 0;
             display: flex;
             justify-content: center;
@@ -84,6 +90,7 @@ height: 8vh;
         .header img.logo {
             max-height: 100%; /* Adjusted to 100% of the header's height */
             max-width: 18%; /* Allow the width to adjust proportionally */
+            border-radius: 50%;
         }
 
         .header .icon div {
@@ -127,8 +134,7 @@ height: 8vh;
 
 
 .footer .navbar a:hover {
-            color: #fff;
+            color: var(--green);
 }
-
 
 
