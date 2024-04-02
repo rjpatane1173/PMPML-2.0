@@ -23,13 +23,13 @@
 
         html {
             font-size: 62.5%;
-            overflow: hidden;
             scroll-behavior: smooth;
             scroll-padding-top: 7rem;
         }
 
         body {
             background: #eee;
+            overflow-y: scroll;
         }
 
 
@@ -39,7 +39,7 @@
             margin-top: 10vh; /* Set margin top dynamically based on header height */
             margin-bottom: 20vh;
             font-size: 2rem;
-            overflow: scroll;
+            overflow-x: scroll;
             height: 720px;
             padding-top: 10px;
             padding-right: 10px;
@@ -68,7 +68,8 @@
         }
 
         .footer {
-             height: 10vh; /* Set height to 20% of the viewport height */
+            font-size: 1rem;
+             height: 10em; /* Set height to 20% of the viewport height */
             bottom: 0;
             display: flex;
             justify-content: center;
@@ -120,6 +121,7 @@
     display: flex;
     align-items: center;
     overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden;
     white-space: nowrap; /* Prevent line breaks */
 }
 
